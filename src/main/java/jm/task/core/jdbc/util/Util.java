@@ -9,7 +9,7 @@ public class Util {
     private static final String hostName = "localhost";
     private static final String dbName = "my_db";
     private static final String userName = "root";
-    private static final String password = "Rjcnz_017066";
+    private static final String password = "root";
     private static Connection conn = null;
 
     private Util() {
