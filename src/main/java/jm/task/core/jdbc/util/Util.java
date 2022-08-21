@@ -25,7 +25,7 @@ public class Util {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String connectionURL = "jdbc:mysql://" + hostName + ":3306/" + dbName;
             conn = DriverManager.getConnection(connectionURL, userName, password);
-            System.out.println(conn.getMetaData().getDriverName());
+//            System.out.println(conn.getMetaData().getDriverName());
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getLocalizedMessage());
         }

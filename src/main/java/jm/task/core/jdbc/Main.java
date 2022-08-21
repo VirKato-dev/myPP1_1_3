@@ -6,7 +6,6 @@ import jm.task.core.jdbc.service.UserServiceImpl;
 public class Main {
     public static void main(String[] args) {
         // реализуйте алгоритм здесь
-
         UserServiceImpl tableUsers = new UserServiceImpl();
         tableUsers.createUsersTable();
         tableUsers.saveUser("Вася", "Егоров", (byte) 20);
@@ -14,7 +13,7 @@ public class Main {
         tableUsers.saveUser("Анна", "Сёмина", (byte) 27);
         tableUsers.saveUser("Галя", "Пикова", (byte) 23);
         tableUsers.getAllUsers().forEach(System.out::println);
-        tableUsers.cleanUsersTable();
-        tableUsers.dropUsersTable();
+//        tableUsers.cleanUsersTable();
+//        tableUsers.dropUsersTable();
     }
 }
