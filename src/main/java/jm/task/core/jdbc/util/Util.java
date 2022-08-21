@@ -2,11 +2,15 @@ package jm.task.core.jdbc.util;
 
 import jm.task.core.jdbc.model.User;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.Environment;
+import org.hibernate.service.ServiceRegistry;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class Util {
     // реализуйте настройку соеденения с БД
@@ -40,17 +44,22 @@ public class Util {
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
-            sessionFactory = new Configuration()
-                    .addAnnotatedClass(User.class) // Hibernate теперь знает о классе User
-                    .setProperty("hibernate.connection.driver_class", driverName)
-                    .setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/" + dbName + "?useSSL=false&serverTimezone=UTC")
-                    .setProperty("hibernate.connection.username", userName)
-                    .setProperty("hibernate.connection.password", password)
-                    .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
-                    .setProperty("hibernate.show_sql", "false") // true для просмотре в консоли SQL запроса
-                    .setProperty("hibernate.current_session_context_class", "thread")
-                    .setProperty("hbm2ddl_auto", "create-drop")
-                    .buildSessionFactory();
+            Properties prop = new Properties();
+            prop.put(Environment.DRIVER, driverName);
+            prop.put(Environment.URL, "jdbc:mysql://localhost:3306/" + dbName + "?useSSL=false&serverTimezone=UTC");
+            prop.put(Environment.USER, userName);
+            prop.put(Environment.PASS, password);
+            prop.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
+            prop.put(Environment.SHOW_SQL, "false");
+            prop.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+            prop.put(Environment.HBM2DDL_AUTO, "create-drop");
+
+            Configuration configuration = new Configuration()
+                    .setProperties(prop)
+                    .addAnnotatedClass(User.class);
+            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                    .applySettings(configuration.getProperties()).build();
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         }
         return sessionFactory;
     }
