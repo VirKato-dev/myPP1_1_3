@@ -47,7 +47,7 @@ public class Util {
                     .setProperty("hibernate.connection.username", userName)
                     .setProperty("hibernate.connection.password", password)
                     .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
-                    .setProperty("hibernate.show_sql", "true")
+                    .setProperty("hibernate.show_sql", "false") // true для просмотре в консоли SQL запроса
                     .setProperty("hibernate.current_session_context_class", "thread")
                     .setProperty("hbm2ddl_auto", "create-drop")
                     .buildSessionFactory();
