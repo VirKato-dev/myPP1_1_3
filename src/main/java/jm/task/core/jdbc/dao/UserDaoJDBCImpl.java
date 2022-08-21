@@ -11,12 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    public UserDaoJDBCImpl() {
+    private Connection connection;
 
+    public UserDaoJDBCImpl() {
+        connection = Util.getDBConnection();
     }
 
     public void createUsersTable() {
-        Connection connection = Util.getDBConnection();
         String sql = "CREATE TABLE users ("
                 + " id INTEGER NOT NULL AUTO_INCREMENT,"
                 + " username VARCHAR(45),"
@@ -24,57 +25,61 @@ public class UserDaoJDBCImpl implements UserDao {
                 + " age INTEGER,"
                 + " PRIMARY KEY (id)"
                 + ");";
-        try {
-            Statement statement = connection.createStatement();
+        try (Statement statement = connection.createStatement()) {
+//            connection.setAutoCommit(true); // по-умолчанию
             statement.executeUpdate(sql);
+//            connection.commit();
         } catch (SQLException e) {
-//            throw new RuntimeException(e);
+            try {
+                connection.rollback();
+            } catch (SQLException ignore) {
+            }
         }
     }
 
     public void dropUsersTable() {
-        Connection connection = Util.getDBConnection();
         String sql = "DROP TABLE users;";
-        try {
-            Statement statement = connection.createStatement();
+        try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
-//            throw new RuntimeException(e);
+            try {
+                connection.rollback();
+            } catch (SQLException ignore) {
+            }
         }
     }
 
     public void saveUser(String name, String lastName, byte age) {
-        Connection connection = Util.getDBConnection();
         String sql = String.format("INSERT INTO users (username, lastname, age)"
-                        + " values ('%s', '%s', '%d');",
-                name, lastName, (int) age);
-        try {
-            Statement statement = connection.createStatement();
+                + " values ('%s', '%s', '%d');", name, lastName, (int) age);
+        try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
             System.out.printf("User с именем – %s добавлен в базу данных%n", name);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            try {
+                connection.rollback();
+            } catch (SQLException ignore) {
+            }
         }
     }
 
     public void removeUserById(long id) {
-        Connection connection = Util.getDBConnection();
         String sql = String.format("DELETE FROM users WHERE id=%d;", id);
-        try {
-            Statement statement = connection.createStatement();
+        try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
-//            throw new RuntimeException(e);
+            try {
+                connection.rollback();
+            } catch (SQLException ignore) {
+            }
         }
     }
 
     public List<User> getAllUsers() {
         List<User> list = new ArrayList<>();
-        Connection connection = Util.getDBConnection();
         String sql = "SELECT * FROM users;";
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
             while (rs.next()) {
                 User user = new User(
                         rs.getString("username"),
@@ -84,19 +89,23 @@ public class UserDaoJDBCImpl implements UserDao {
                 list.add(user);
             }
         } catch (SQLException e) {
-//            throw new RuntimeException(e);
+            try {
+                connection.rollback();
+            } catch (SQLException ignore) {
+            }
         }
         return list;
     }
 
     public void cleanUsersTable() {
-        Connection connection = Util.getDBConnection();
-        String sql = "DELETE FROM users";
-        try {
-            Statement statement = connection.createStatement();
+        String sql = "TRUNCATE users";
+        try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
-//            throw new RuntimeException(e);
+            try {
+                connection.rollback();
+            } catch (SQLException ignore) {
+            }
         }
     }
 }
