@@ -19,13 +19,12 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.createSQLQuery("CREATE TABLE IF NOT EXISTS users (" + //SQL
-                            "id INTEGER NOT NULL AUTO_INCREMENT, " +
-                            "name VARCHAR(45), " +
-                            "lastname VARCHAR(45), " +
-                            "age INT," +
-                            "PRIMARY KEY (id)" +
-                            ")")
+            session.createSQLQuery("CREATE TABLE IF NOT EXISTS USERS (" + //SQL
+                            " id INT NOT NULL AUTO_INCREMENT," +
+                            " name VARCHAR(45) NOT NULL ," +
+                            " lastname VARCHAR(45) NOT NULL ," +
+                            " age INT," +
+                            " PRIMARY KEY (id))")
                     .executeUpdate();
             transaction.commit();
         } catch (HibernateException e) {
@@ -57,7 +56,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction = session.beginTransaction();
             session.save(new User(name, lastName, age));
             transaction.commit();
-            System.out.printf("User с именем – %s добавлен в базу данных", name);
+            System.out.printf("User с именем – %s добавлен в базу данных%n", name);
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();

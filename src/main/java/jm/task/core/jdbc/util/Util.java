@@ -49,7 +49,7 @@ public class Util {
             prop.put(Environment.URL, "jdbc:mysql://localhost:3306/" + dbName + "?useSSL=false&serverTimezone=UTC");
             prop.put(Environment.USER, userName);
             prop.put(Environment.PASS, password);
-            prop.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
+            prop.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
             prop.put(Environment.SHOW_SQL, "false");
             prop.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
             prop.put(Environment.HBM2DDL_AUTO, "create-drop");

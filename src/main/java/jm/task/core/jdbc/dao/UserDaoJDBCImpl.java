@@ -20,7 +20,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void createUsersTable() {
         String sql = "CREATE TABLE users ("
                 + " id INTEGER NOT NULL AUTO_INCREMENT,"
-                + " username VARCHAR(45),"
+                + " name VARCHAR(45),"
                 + " lastname VARCHAR(45),"
                 + " age INTEGER,"
                 + " PRIMARY KEY (id)"
