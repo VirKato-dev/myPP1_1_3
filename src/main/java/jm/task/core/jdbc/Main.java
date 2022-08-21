@@ -13,7 +13,7 @@ public class Main {
         tableUsers.saveUser("Анна", "Сёмина", (byte) 27);
         tableUsers.saveUser("Галя", "Пикова", (byte) 23);
         tableUsers.getAllUsers().forEach(System.out::println);
-//        tableUsers.cleanUsersTable();
-//        tableUsers.dropUsersTable();
+        tableUsers.cleanUsersTable();
+        tableUsers.dropUsersTable();
     }
 }
