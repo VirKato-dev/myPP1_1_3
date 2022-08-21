@@ -10,12 +10,12 @@ public class Main {
 
         UserServiceImpl tableUsers = new UserServiceImpl();
         tableUsers.createUsersTable();
-//        tableUsers.saveUser("Вася", "Егоров", (byte) 20);
-//        tableUsers.saveUser("Миша", "Иванов", (byte) 18);
-//        tableUsers.saveUser("Анна", "Сёмина", (byte) 27);
-//        tableUsers.saveUser("Галя", "Пикова", (byte) 23);
-//        tableUsers.getAllUsers().forEach(System.out::println);
-//        tableUsers.cleanUsersTable();
+        tableUsers.saveUser("Вася", "Егоров", (byte) 20);
+        tableUsers.saveUser("Миша", "Иванов", (byte) 18);
+        tableUsers.saveUser("Анна", "Сёмина", (byte) 27);
+        tableUsers.saveUser("Галя", "Пикова", (byte) 23);
+        tableUsers.getAllUsers().forEach(System.out::println);
+        tableUsers.cleanUsersTable();
         tableUsers.dropUsersTable();
     }
 }
