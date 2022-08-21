@@ -6,6 +6,7 @@ import jm.task.core.jdbc.service.UserServiceImpl;
 public class Main {
     public static void main(String[] args) {
         // реализуйте алгоритм здесь
+        // Hibernate
 
         UserServiceImpl tableUsers = new UserServiceImpl();
         tableUsers.createUsersTable();
