@@ -28,6 +28,11 @@ public class UserDaoJDBCImpl implements UserDao {
             } catch (SQLException ignore) {
             }
             System.out.println(e.getLocalizedMessage());
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ignore) {
+            }
         }
     }
 
@@ -64,7 +69,6 @@ public class UserDaoJDBCImpl implements UserDao {
         String sql = "SELECT * FROM users;";
         try (Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
-            connection.setAutoCommit(false);
             while (rs.next()) {
                 User user = new User(
                         rs.getString("username"),
