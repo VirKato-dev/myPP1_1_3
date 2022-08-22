@@ -54,7 +54,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) {
         String sql = String.format("INSERT INTO users (username, lastname, age)"
-                + " values ('%s', '%s', '%d');", name, lastName, (int) age);
+                + " values ('%s', '%s', %d);", name, lastName, (int) age);
         execSQL(sql);
         System.out.printf("User с именем – %s добавлен в базу данных%n", name);
     }
