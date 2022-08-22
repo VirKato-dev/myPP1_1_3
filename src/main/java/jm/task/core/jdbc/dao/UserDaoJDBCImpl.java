@@ -77,11 +77,8 @@ public class UserDaoJDBCImpl implements UserDao {
                 user.setId(rs.getLong("id"));
                 list.add(user);
             }
-        } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException ignore) {
-            }
+        } catch (SQLException ignore) {
+            // rollback не нужен. Операция не в транзакции
         }
         return list;
     }
