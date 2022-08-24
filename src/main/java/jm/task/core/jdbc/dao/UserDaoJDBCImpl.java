@@ -19,7 +19,10 @@ public class UserDaoJDBCImpl implements UserDao {
 
     private void execSQL(String sql) {
         try (Statement statement = connection.createStatement()) {
+            //TODO какие классы относятся к JDBC
+            //TODO PreparedStatement
             connection.setAutoCommit(false); // true по-умолчанию
+            //TODO транзакция - что такое для чего
             statement.executeUpdate(sql);
             connection.commit(); // если AutoCommit = false
         } catch (SQLException e) {
