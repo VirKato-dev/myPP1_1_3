@@ -8,6 +8,8 @@ public class Main {
     public static void main(String[] args) {
         // реализуйте алгоритм здесь
         // Hibernate
+        //TODO Использует ли Hibernate внутри себя JDBC?
+        //TODO Что такое JPA? Чем JPA отличается от Hibernate?
         UserService tableUsers = new UserServiceImpl();
         tableUsers.createUsersTable();
         tableUsers.saveUser("Вася", "Егоров", (byte) 20);

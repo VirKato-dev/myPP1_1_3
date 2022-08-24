@@ -10,7 +10,8 @@ import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
     public UserDaoHibernateImpl() {
-
+        //TODO Зачем здесь конструктор по-умолчанию?
+        //TODO инициировать SessionFactory
     }
 
 
@@ -69,7 +70,8 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.delete(session.get(User.class, id)); //inner
+            //TODO почему удаление по сущности более правильно чем удаление запросом по айди.
+            session.delete(session.get(User.class, id)); // почему лучше, чем один HQL/SQL запрос
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) {
@@ -78,6 +80,7 @@ public class UserDaoHibernateImpl implements UserDao {
         }
     }
 
+    //TODO JPQL HQL SQL
     @Override
     public List<User> getAllUsers() {
         List<User> userList;

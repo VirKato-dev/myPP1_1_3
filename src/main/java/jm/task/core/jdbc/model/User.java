@@ -1,7 +1,7 @@
 package jm.task.core.jdbc.model;
 
 import javax.persistence.*;
-
+//TODO стадии жизненного цикла в хибернейте
 @Entity
 @Table(name = "users") // указать имя таблицы при разнице в названии таблицы и класса
 public class User {
@@ -19,7 +19,6 @@ public class User {
     private Byte age;
 
     public User() {
-
     }
 
     public User(String name, String lastName, Byte age) {

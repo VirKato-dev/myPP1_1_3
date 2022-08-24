@@ -51,7 +51,7 @@ public class Util {
             prop.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
             prop.put(Environment.SHOW_SQL, "false");
             prop.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-            prop.put(Environment.HBM2DDL_AUTO, "create-drop");
+            prop.put(Environment.HBM2DDL_AUTO, "create-drop"); //TODO какие есть параметры аргумента ddl-auto
 
             Configuration configuration = new Configuration()
                     .setProperties(prop)
