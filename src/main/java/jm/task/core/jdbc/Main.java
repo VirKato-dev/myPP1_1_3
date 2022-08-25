@@ -17,6 +17,7 @@ public class Main {
         tableUsers.saveUser("Анна", "Сёмина", (byte) 27);
         tableUsers.saveUser("Галя", "Пикова", (byte) 23);
         tableUsers.getAllUsers().forEach(System.out::println);
+        tableUsers.removeUserById(3);
         tableUsers.cleanUsersTable();
         tableUsers.dropUsersTable();
     }
