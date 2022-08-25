@@ -1,25 +1,17 @@
 package jm.task.core.jdbc.model;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Table
+/***
+ * Описываем объект хранящийся в базе данных, но JDBC не раскладывает данные по полям самостоятельно.
+ * Этим нужно заниматься пользователю. Поэтому аннотации как в Hibernate здесь не используются.
+ */
 public class User {
-    @Id
     private Long id;
 
-    @Column
     private String name;
 
-    @Column
     private String lastName;
 
-    @Column
     private Byte age;
-
-    public User() {
-    }
 
     public User(String name, String lastName, Byte age) {
         this.name = name;
