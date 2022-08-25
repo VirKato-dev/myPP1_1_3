@@ -70,14 +70,13 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void removeUserById(long id) {
-        User user = null;
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             //TODO почему удаление по сущности более правильно, чем удаление запросом по айди.
-            user = session.get(User.class, id); // можно переиспользовать объект
+            User user = session.get(User.class, id); // можно переиспользовать объект
             if (user != null) {
-                session.delete(user);
+                session.delete(user); // удаляет записи и из связанных таблиц (поддерживается каскадное удаление)
             }
             transaction.commit();
         } catch (HibernateException e) {
@@ -85,7 +84,6 @@ public class UserDaoHibernateImpl implements UserDao {
                 transaction.rollback();
             }
         }
-        System.out.println("Удалён пользователь: " + (user != null ? user : "(нет объекта)"));
     }
 
     //TODO JPQL HQL SQL
