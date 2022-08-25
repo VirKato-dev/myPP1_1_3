@@ -28,13 +28,13 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {
             try {
                 connection.rollback();
-            } catch (SQLException ignore) {
+            } catch (SQLException ignored) {
             }
             System.out.println(e.getLocalizedMessage());
         } finally {
             try {
                 connection.setAutoCommit(true);
-            } catch (SQLException ignore) {
+            } catch (SQLException ignored) {
             }
         }
     }
@@ -80,8 +80,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 user.setId(rs.getLong("id"));
                 list.add(user);
             }
-        } catch (SQLException ignore) {
-            // rollback не нужен. Операция не в транзакции
+        } catch (SQLException ignore) { // rollback не нужен. Операция не в транзакции
         }
         return list;
     }
