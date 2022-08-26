@@ -87,7 +87,7 @@ public class UserDaoHibernateImpl implements UserDao {
         }
     }
 
-    //TODO JPQL HQL SQL
+    //TODO JPQL(Java Persistence API) HQL(Hibernate Query Language) SQL(Structured Query Language)
     @Override
     public List<User> getAllUsers() {
         List<User> userList;

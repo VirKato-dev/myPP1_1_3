@@ -1,11 +1,14 @@
 package jm.task.core.jdbc;
 
+import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
+import jm.task.core.jdbc.util.Util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceUtil;
 
 
 public class Main {
@@ -21,7 +24,9 @@ public class Main {
         tableUsers.saveUser("Анна", "Сёмина", (byte) 27);
         tableUsers.saveUser("Галя", "Пикова", (byte) 23);
         tableUsers.getAllUsers().forEach(System.out::println);
+
         tableUsers.removeUserById(3);
+
         tableUsers.cleanUsersTable();
         tableUsers.dropUsersTable();
     }
