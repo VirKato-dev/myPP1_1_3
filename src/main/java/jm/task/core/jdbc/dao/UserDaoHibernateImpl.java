@@ -71,8 +71,7 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void removeUserById(long id) {
         Transaction transaction = null;
-        try {
-            Session session = sessionFactory.getCurrentSession();
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             //TODO почему удаление по сущности более правильно, чем удаление запросом по айди.
             User user = session.get(User.class, id); // можно переиспользовать объект
