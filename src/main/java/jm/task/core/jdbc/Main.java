@@ -1,14 +1,8 @@
 package jm.task.core.jdbc;
 
-import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
 import jm.task.core.jdbc.util.Util;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceUtil;
 
 
 public class Main {
@@ -29,7 +23,8 @@ public class Main {
 
         tableUsers.getAllUsers().forEach(System.out::println);
 
-        tableUsers.cleanUsersTable();
-        tableUsers.dropUsersTable();
+//        tableUsers.cleanUsersTable();
+//        tableUsers.dropUsersTable();
+        Util.getSessionFactory().close();
     }
 }

@@ -13,7 +13,6 @@ public class UserDaoHibernateImpl implements UserDao {
     private final SessionFactory sessionFactory;
 
     public UserDaoHibernateImpl() {
-        //TODO Зачем здесь конструктор по-умолчанию? (перезаписываемые методы не могут быть static)
         sessionFactory = Util.getSessionFactory();
     }
 
@@ -73,10 +72,9 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            //TODO почему удаление по сущности более правильно, чем удаление запросом по айди.
-            User user = session.get(User.class, id); // можно переиспользовать объект
+            User user = session.get(User.class, id);
             if (user != null) {
-                session.delete(user); // удаляет записи и из связанных таблиц (поддерживается каскадное удаление)
+                session.delete(user);
             }
             transaction.commit();
             System.out.println("Удалена запись: " + user);
@@ -87,7 +85,6 @@ public class UserDaoHibernateImpl implements UserDao {
         }
     }
 
-    //TODO JPQL(Java Persistence API) HQL(Hibernate Query Language) SQL(Structured Query Language)
     @Override
     public List<User> getAllUsers() {
         List<User> userList;
