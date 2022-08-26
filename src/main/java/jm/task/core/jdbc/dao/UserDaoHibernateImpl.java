@@ -71,7 +71,8 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void removeUserById(long id) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
+        try {
+            Session session = sessionFactory.getCurrentSession();
             transaction = session.beginTransaction();
             //TODO почему удаление по сущности более правильно, чем удаление запросом по айди.
             User user = session.get(User.class, id); // можно переиспользовать объект
@@ -79,6 +80,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 session.delete(user); // удаляет записи и из связанных таблиц (поддерживается каскадное удаление)
             }
             transaction.commit();
+            System.out.println("Удалена запись: " + user);
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
