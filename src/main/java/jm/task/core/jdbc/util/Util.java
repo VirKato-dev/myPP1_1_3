@@ -22,11 +22,13 @@ public class Util {
     public static Connection getDBConnection(String hostName, String dbName, String userName, String password) {
         if (conn != null) return conn;
         try {
-            //Class.forName("com.mysql.cj.jdbc.Driver"); // не требуется для JDBC 4.3 включённой в jdk17
+//            Class.forName("com.mysql.cj.jdbc.Driver"); // не требуется для JDBC 4.3 включённой в jdk17
             String connectionURL = "jdbc:mysql://" + hostName + ":3306/" + dbName;
             conn = DriverManager.getConnection(connectionURL, userName, password);
         } catch (SQLException /*| ClassNotFoundException*/ e) {
             System.out.println(e.getLocalizedMessage());
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
         }
         return conn;
     }
