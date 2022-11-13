@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class Util {
-    // реализуйте настройку соеденения с БД
+    // реализуйте настройку соединения с БД
     private static final String hostName = "localhost";
     private static final String dbName = "my_db";
     private static final String userName = "root";
